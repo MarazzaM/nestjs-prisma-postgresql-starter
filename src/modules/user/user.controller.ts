@@ -35,10 +35,11 @@ import { UserWithRoles } from './types/user.types';
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
   @Get()
   @ApiQuery({ name: 'where', required: false, type: 'string' })
   @ApiQuery({ name: 'orderBy', required: false, type: 'string' })
+  @ApiQuery({ name: 'page', required: false, type: 'number' })
+  @ApiQuery({ name: 'perPage', required: false, type: 'number' })
   @ApiOkBaseResponse({ dto: UserBaseEntity, isArray: true })
   @UseGuards(AccessGuard)
   @Serialize(UserBaseEntity)
@@ -47,8 +48,10 @@ export class UserController {
     @Query('where', WherePipe) where?: Prisma.UserWhereInput,
     @Query('orderBy', OrderByPipe)
     orderBy?: Prisma.UserOrderByWithRelationInput,
+    @Query('page') page?: number,
+    @Query('perPage') perPage?: number, 
   ): Promise<PaginatorTypes.PaginatedResult<User>> {
-    return this.userService.findAll(where, orderBy);
+    return this.userService.findAll(where, orderBy, page, perPage); // Pass page and perPage to service method
   }
 
   @Get('me')

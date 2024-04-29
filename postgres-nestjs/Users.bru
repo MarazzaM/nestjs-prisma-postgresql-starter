@@ -1,0 +1,21 @@
+meta {
+  name: Users
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:3000/api/v1/users?where=firstName:Test&page=2&perPage=2
+  body: json
+  auth: bearer
+}
+
+query {
+  where: firstName:Test
+  page: 2
+  perPage: 2
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFhYTA1ZTVhLTk3OTUtNGEzMy1hZDk1LWViODM5NzVhMmU1NyIsImVtYWlsIjoicGFuaWNAdGhlZGlzLmNvIiwicm9sZXMiOlsiY3VzdG9tZXIiXSwiaWF0IjoxNzE0NDEwNjM3LCJleHAiOjE3MTQ3MTA2Mzd9.ThP0CpoB3DYBCKYDzFcn28N5klJ_Ctrvl78E57kly8k
+}

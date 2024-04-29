@@ -86,10 +86,19 @@ export class UserRepository {
   async findAll(
     where: Prisma.UserWhereInput,
     orderBy: Prisma.UserOrderByWithRelationInput,
+    page: number = 1,
+    perPage: number = 10,
   ): Promise<PaginatorTypes.PaginatedResult<User>> {
-    return this.paginate(this.prisma.user, {
-      where,
-      orderBy,
+    return this.paginate(
+      this.prisma.user,
+      {
+        where,
+        orderBy,
+      },
+      {
+        page,
+        perPage,
     });
   }
+  
 }

@@ -29,7 +29,10 @@ export class UserService {
   findAll(
     where: Prisma.UserWhereInput,
     orderBy: Prisma.UserOrderByWithRelationInput,
+    page: number = 1,
+    perPage: number = 10,
   ): Promise<PaginatorTypes.PaginatedResult<User>> {
-    return this.userRepository.findAll(where, orderBy);
+    return this.userRepository.findAll(where, orderBy, page, perPage);
   }
+  
 }
